@@ -13,6 +13,7 @@ function addTask() {
     li.appendChild(span);
   }
   inputBox.value = "";
+  updateStats();
   saveData();
 }
 
@@ -21,9 +22,11 @@ listContainer.addEventListener(
   function (e) {
     if (e.target.tagName === "LI") {
       e.target.classList.toggle("checked");
+      updateStats();
       saveData();
     } else if (e.target.tagName === "SPAN") {
       e.target.parentElement.remove();
+      updateStats();
       saveData();
     }
   },
@@ -35,6 +38,12 @@ function saveData() {
 }
 function showTask() {
   listContainer.innerHTML = localStorage.getItem("data");
+}
+
+const updateStats = () => {
+  const completedTasks = listContainer.querySelectorAll("li.checked").length;
+  const totalTasks = listContainer.children.length;
+  document.getElementById("numbers").innerText = `${completedTasks} / ${totalTasks}`;
 }
 
 showTask();
