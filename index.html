@@ -9,6 +9,13 @@
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap"
       rel="stylesheet"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      integrity="sha512-..."
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
     <link rel="stylesheet" href="style.css" />
     <title>To Do List</title>
   </head>
@@ -21,12 +28,40 @@
         </div>
       </div>
       <div class="row">
-        <input type="text" id="input-box" placeholder="Digite uma nova tarefa" />
+        <input
+          type="text"
+          id="input-box"
+          placeholder="Digite uma nova tarefa"
+        />
         <button onclick="addTask()">add</button>
       </div>
-      <ul id="list-container">
-      </ul>
+      <ul id="list-container"></ul>
     </div>
+    <footer class="rodape">
+      <p style="margin-top: 10px; font-size: 70%">
+        © 2025 Filipe Alves. Todos os direitos reservados.
+      </p>
+      <div style="margin-top: 10px">
+        <a
+          href="https://www.linkedin.com/in/filipeasj/"
+          target="_blank"
+          class="rodape-botao"
+          ><i class="fab fa-linkedin"></i
+        ></a>
+        <a
+          href="https://www.instagram.com/filipeasj/"
+          target="_blank"
+          class="rodape-botao"
+          ><i class="fab fa-instagram"></i
+        ></a>
+        <a
+          href="https://github.com/filipeasj"
+          target="_blank"
+          class="rodape-botao"
+          ><i class="fab fa-github"></i
+        ></a>
+      </div>
+    </footer>
     <script src="script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@tsparticles/confetti@3.0.3/tsparticles.confetti.bundle.min.js"></script>
   </body>
