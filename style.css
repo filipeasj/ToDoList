@@ -37,15 +37,16 @@ body {
   margin-bottom: 20px;
 }
 
-.contador{
-  background: linear-gradient(135deg, var(--primaria), var(--secundaria));
-  padding: 10px;
-  width: 65px;
-  height: 65px;
+.contador {
+  width: 70px;
+  height: 70px;
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 50%;
+  background: linear-gradient(135deg, var(--primaria), var(--secundaria));
+  background-attachment: fixed;
+  box-shadow: inset 2px 2px 5px rgba(0,0,0,0.2);
 }
 
 .contador h3{
