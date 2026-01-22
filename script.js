@@ -84,3 +84,4 @@ const interval = setInterval(function() {
 }
 
 mostrarTarefas();
+atualizarEstados();
