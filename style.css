@@ -6,8 +6,8 @@
 }
 
 :root {
-  --primaria: #153677;
-  --secundaria: #4e085f;
+  --primaria: #4e085f;
+  --secundaria: #153677;
   --terciario: #ff5945;
   --quarternario: #ff442f;
   --claro: #edeef0;
@@ -54,7 +54,7 @@ body {
 }
 
 h1 {
-  color: var(--primaria);
+  color: var(--mais-escuro);
   text-align: center;
 }
 
@@ -163,9 +163,4 @@ footer.rodape {
 
 .rodape-botao:hover {
   color: var(--terciario);
-}
-
-@keyframes fadeIn {
-  from {background: linear-gradient(135deg, var(--primaria), var(--secundaria));}
-  to {background: linear-gradient(135deg, var(--secundaria), var(--primaria));}
 }

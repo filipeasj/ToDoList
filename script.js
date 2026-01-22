@@ -1,7 +1,7 @@
 const inputBox = document.getElementById("input-box");
 const listContainer = document.getElementById("list-container");
 
-function addTask() {
+function adicionarTarefa() {
   if (inputBox.value === "") {
     alert("você deve digitar uma tarefa!");
   } else {
@@ -13,8 +13,8 @@ function addTask() {
     li.appendChild(span);
   }
   inputBox.value = "";
-  updateStats();
-  saveData();
+  atualizarEstados();
+  salvarDados();
 }
 
 listContainer.addEventListener(
@@ -22,30 +22,30 @@ listContainer.addEventListener(
   function (e) {
     if (e.target.tagName === "LI") {
       e.target.classList.toggle("checked");
-      updateStats();
-      saveData();
+      atualizarEstados();
+      salvarDados();
     } else if (e.target.tagName === "SPAN") {
       e.target.parentElement.remove();
-      updateStats();
-      saveData();
+      atualizarEstados();
+      salvarDados();
     }
   },
   false,
 );
 
-function saveData() {
+function salvarDados() {
   localStorage.setItem("data", listContainer.innerHTML);
 }
-function showTask() {
+function mostrarTarefas() {
   listContainer.innerHTML = localStorage.getItem("data");
 }
 
-const updateStats = () => {
-  const completedTasks = listContainer.querySelectorAll("li.checked").length;
-  const totalTasks = listContainer.children.length;
-  document.getElementById("numbers").innerText = `${completedTasks} / ${totalTasks}`;
+const atualizarEstados = () => {
+  const tarefasCompletas = listContainer.querySelectorAll("li.checked").length;
+  const totalTarefas = listContainer.children.length;
+  document.getElementById("numbers").innerText = `${tarefasCompletas} / ${totalTarefas}`;
 
-  if(totalTasks > 0 && completedTasks === totalTasks){
+  if(totalTarefas > 0 && tarefasCompletas === totalTarefas){
     confete();
   }
 }
@@ -68,7 +68,6 @@ const interval = setInterval(function() {
 
   const particleCount = 50 * (timeLeft / duration);
 
-  // since particles fall down, start a bit higher than random
   confetti(
     Object.assign({}, defaults, {
       particleCount,
@@ -84,4 +83,4 @@ const interval = setInterval(function() {
 }, 250);
 }
 
-showTask();
+mostrarTarefas();
