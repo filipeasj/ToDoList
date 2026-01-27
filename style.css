@@ -16,13 +16,12 @@
 }
 
 body {
-  background: linear-gradient(135deg, var(--primaria), var(--secundaria));
+  background: linear-gradient(to right, var(--primaria), var(--secundaria));
   min-height: 100vh;
-  padding: 10px;
 }
 
 .container {
-  width: 100%;
+  width: 90%;
   max-width: 500px;
   background-color: white;
   margin: 100px auto 20px;
@@ -79,7 +78,7 @@ input {
 button {
     border: none;
     outline: none;
-    padding: 16px 30px;
+    padding: 10px;
     background: var(--terciario);
     color: var(--claro);
     font-size: 16px;
