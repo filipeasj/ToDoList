@@ -1,86 +1,119 @@
 const inputBox = document.getElementById("input-box");
 const listContainer = document.getElementById("list-container");
+const numbers = document.getElementById("numbers");
+
+let confeteAtivo = false;
 
 function adicionarTarefa() {
-  if (inputBox.value === "") {
-    alert("você deve digitar uma tarefa!");
-  } else {
-    let li = document.createElement("li");
-    li.innerHTML = inputBox.value;
-    listContainer.appendChild(li);
-    let span = document.createElement("span");
-    span.innerHTML = "\u00d7";
-    li.appendChild(span);
+  const texto = inputBox.value.trim();
+
+  if (!texto) {
+    alert("Você deve digitar uma tarefa!");
+    return;
   }
+
+  const li = document.createElement("li");
+  li.textContent = texto;
+
+  const span = document.createElement("span");
+  span.textContent = "×";
+
+  li.appendChild(span);
+  listContainer.appendChild(li);
+
   inputBox.value = "";
+
   atualizarEstados();
   salvarDados();
 }
 
-listContainer.addEventListener(
-  "click",
-  function (e) {
-    if (e.target.tagName === "LI") {
-      e.target.classList.toggle("checked");
-      atualizarEstados();
-      salvarDados();
-    } else if (e.target.tagName === "SPAN") {
-      e.target.parentElement.remove();
-      atualizarEstados();
-      salvarDados();
-    }
-  },
-  false,
-);
+inputBox.addEventListener("keypress", (e) => {
+  if (e.key === "Enter") {
+    adicionarTarefa();
+  }
+});
+
+listContainer.addEventListener("click", (e) => {
+  const elemento = e.target;
+
+  if (elemento.tagName === "LI") {
+    elemento.classList.toggle("checked");
+  }
+
+  if (elemento.tagName === "SPAN") {
+    elemento.parentElement.remove();
+  }
+
+  atualizarEstados();
+  salvarDados();
+});
 
 function salvarDados() {
-  localStorage.setItem("data", listContainer.innerHTML);
+  localStorage.setItem("tarefas", listContainer.innerHTML);
 }
+
 function mostrarTarefas() {
-  listContainer.innerHTML = localStorage.getItem("data");
+  const dados = localStorage.getItem("tarefas");
+
+  if (dados) {
+    listContainer.innerHTML = dados;
+  }
 }
 
-const atualizarEstados = () => {
-  const tarefasCompletas = listContainer.querySelectorAll("li.checked").length;
-  const totalTarefas = listContainer.children.length;
-  document.getElementById("numbers").innerText = `${tarefasCompletas} / ${totalTarefas}`;
+function atualizarEstados() {
+  const completas = listContainer.querySelectorAll("li.checked").length;
+  const total = listContainer.children.length;
 
-  if(totalTarefas > 0 && tarefasCompletas === totalTarefas){
+  numbers.textContent = `${completas}/${total}`;
+
+  if (total > 0 && completas === total && !confeteAtivo) {
+    confeteAtivo = true;
     confete();
   }
+
+  if (completas !== total) {
+    confeteAtivo = false;
+  }
 }
 
-const confete = () => {
-  const duration = 2 * 1000,
-  animationEnd = Date.now() + duration,
-  defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
+function confete() {
+  const duration = 2000;
+  const end = Date.now() + duration;
 
-function randomInRange(min, max) {
-  return Math.random() * (max - min) + min;
-}
+  const defaults = {
+    startVelocity: 30,
+    spread: 360,
+    ticks: 60,
+    zIndex: 0
+  };
 
-const interval = setInterval(function() {
-  const timeLeft = animationEnd - Date.now();
-
-  if (timeLeft <= 0) {
-    return clearInterval(interval);
+  function random(min, max) {
+    return Math.random() * (max - min) + min;
   }
 
-  const particleCount = 50 * (timeLeft / duration);
+  const interval = setInterval(() => {
+    const timeLeft = end - Date.now();
 
-  confetti(
-    Object.assign({}, defaults, {
+    if (timeLeft <= 0) {
+      clearInterval(interval);
+      return;
+    }
+
+    const particleCount = 50 * (timeLeft / duration);
+
+    confetti({
+      ...defaults,
       particleCount,
-      origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 },
-    })
-  );
-  confetti(
-    Object.assign({}, defaults, {
+      origin: { x: random(0.1, 0.3), y: Math.random() - 0.2 }
+    });
+
+    confetti({
+      ...defaults,
       particleCount,
-      origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 },
-    })
-  );
-}, 250);
+      origin: { x: random(0.7, 0.9), y: Math.random() - 0.2 }
+    });
+
+  }, 250);
 }
 
 mostrarTarefas();
