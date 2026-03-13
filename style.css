@@ -8,8 +8,8 @@
 :root{
   --primaria:#4e085f;
   --secundaria:#153677;
-  --terciario:#ff5945;
-  --quarternario:#ff442f;
+  --terciario:#c91919;
+  --quarternario:#9e0505;
   --claro:#edeef0;
   --escuro:#444;
   --preto:#000;
@@ -22,6 +22,13 @@ body{
   flex-direction:column;
   align-items:center;
   padding:20px;
+}
+
+main{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .container{
@@ -52,10 +59,10 @@ h1{
   display:flex;
   justify-content:center;
   align-items:center;
-  background:linear-gradient(135deg,var(--primaria),var(--secundaria));
-  color:white;
+  color:rgb(0, 0, 0);
   font-weight:bold;
-  box-shadow:inset 2px 2px 5px rgba(0,0,0,0.2);
+  box-shadow:inset 2px 5px 5px rgba(0,0,0,0.2);
+  border: var(--secundaria) 1px dashed;
 }
 
 .row{
@@ -79,6 +86,7 @@ button{
   padding:15px 25px;
   background:var(--terciario);
   color:white;
+  font-weight: bold;
   border-radius:30px;
   cursor:pointer;
   transition:all .3s ease;
@@ -99,10 +107,6 @@ ul li{
   cursor:pointer;
   position:relative;
   transition:.2s;
-}
-
-ul li:hover{
-  background:#f7f7f7;
 }
 
 ul li::before{

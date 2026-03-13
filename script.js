@@ -1,6 +1,9 @@
 const inputBox = document.getElementById("input-box");
 const listContainer = document.getElementById("list-container");
 const numbers = document.getElementById("numbers");
+const addButton = document.getElementById("add-task");
+
+addButton.addEventListener("click", adicionarTarefa);
 
 let confeteAtivo = false;
 
@@ -27,8 +30,8 @@ function adicionarTarefa() {
   salvarDados();
 }
 
-inputBox.addEventListener("keypress", (e) => {
-  if (e.key === "Enter") {
+inputBox.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
     adicionarTarefa();
   }
 });
